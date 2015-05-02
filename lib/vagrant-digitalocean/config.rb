@@ -37,7 +37,7 @@ module VagrantPlugins
         @token              = ENV['DO_TOKEN'] if @token == UNSET_VALUE
         @image              = 'ubuntu-14-04-x64' if @image == UNSET_VALUE
         @image_name         = nil if @image_name == UNSET_VALUE
-        @region             = 'nyc2' if @region == UNSET_VALUE
+        @region             = 'nyc3' if @region == UNSET_VALUE
         @size               = '512mb' if @size == UNSET_VALUE
         @private_networking = false if @private_networking == UNSET_VALUE
         @ipv6               = false if @ipv6 == UNSET_VALUE
