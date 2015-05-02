@@ -1,8 +1,6 @@
 require 'vagrant/util/subprocess'
 require 'vagrant/util/which'
 
-require Vagrant.source_root.join('plugins/synced_folders/rsync/helper')
-
 module VagrantPlugins
   module DigitalOcean
     module Actions
@@ -81,8 +79,8 @@ module VagrantPlugins
               command.insert(1, "--chmod", "ugo=rwX")
             end
 
-            r = VagrantPlugins::SyncedFolderRSync::RsyncHelper.rsync_single(@machine, ssh_info, data)
-            if r != 0
+            r = Vagrant::Util::Subprocess.execute(*command)
+            if r.exit_code != 0
               raise Errors::RsyncError,
                 :guestpath => guestpath,
                 :hostpath => hostpath,
