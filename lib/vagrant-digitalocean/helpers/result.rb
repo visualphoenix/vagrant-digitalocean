@@ -14,6 +14,20 @@ module VagrantPlugins
           find(sub_obj, search)["id"]
         end
 
+        def find_name(sub_obj, search)
+          key = search.keys.first #:slug
+          value = search[key].to_s #sfo1
+          key = key.to_s #slug
+
+          if @result.has_key?(sub_obj.to_s)
+            result = @result[sub_obj.to_s].inject(nil) do |result, obj|
+              obj[key] == value ? obj : result
+            end
+          end
+
+          result ? result["name"] : nil
+        end
+
         def find(sub_obj, search)
           key = search.keys.first #:slug
           value = search[key].to_s #sfo1

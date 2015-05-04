@@ -14,6 +14,7 @@ module VagrantPlugins
       attr_accessor :setup
       attr_accessor :user_data
       attr_accessor :root_username
+      attr_accessor :domain
 
       alias_method :setup?, :setup
 
@@ -31,6 +32,7 @@ module VagrantPlugins
         @setup              = UNSET_VALUE
         @user_data          = UNSET_VALUE
         @root_username      = UNSET_VALUE
+        @domain             = UNSET_VALUE
       end
 
       def finalize!
@@ -47,6 +49,7 @@ module VagrantPlugins
         @setup              = true if @setup == UNSET_VALUE
         @user_data          = nil if @user_data == UNSET_VALUE
         @root_username      = 'root' if @root_username == UNSET_VALUE
+        @domain             = nil if @domain == UNSET_VALUE
       end
 
       def validate(machine)

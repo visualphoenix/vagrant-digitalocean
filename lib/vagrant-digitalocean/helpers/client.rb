@@ -26,7 +26,7 @@ module VagrantPlugins
         end
 
         def delete(path, params = {}, method = :delete)
-          @client.request :url_encoded
+#          @client.request :url_encoded
           request(path, params, :delete)
         end
 

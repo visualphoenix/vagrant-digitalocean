@@ -1,6 +1,7 @@
 require 'vagrant-digitalocean/actions/check_state'
 require 'vagrant-digitalocean/actions/create'
 require 'vagrant-digitalocean/actions/destroy'
+require 'vagrant-digitalocean/actions/destroydomain'
 require 'vagrant-digitalocean/actions/shut_down'
 require 'vagrant-digitalocean/actions/power_off'
 require 'vagrant-digitalocean/actions/power_on'
@@ -26,6 +27,7 @@ module VagrantPlugins
             else
               b.use Call, DestroyConfirm do |env2, b2|
                 if env2[:result]
+                  b2.use DestroyDomain
                   b2.use Destroy
                   b2.use ProvisionerCleanup if defined?(ProvisionerCleanup)
                 end

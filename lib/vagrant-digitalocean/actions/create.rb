@@ -58,6 +58,13 @@ module VagrantPlugins
             })
           end
 
+          if @machine.provider_config.domain
+          @client.post('/v2/domains', {
+            :name => @machine.provider_config.domain,
+            :ip_address => public_network['ip_address']
+          })
+          end
+
           # wait for ssh to be ready
           switch_user = @machine.provider_config.setup?
           user = @machine.config.ssh.username

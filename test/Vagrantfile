@@ -35,6 +35,7 @@ Vagrant.configure('2') do |config|
       provider.setup                = false
       provider.private_networking   = true
       provider.user_data            = File.read('user-data.yml').gsub(/@SSH_PUBKEY@/,File.read('test_id_rsa.pub'))
+      provider.domain               = 'test.com'
     end
   end
 end
