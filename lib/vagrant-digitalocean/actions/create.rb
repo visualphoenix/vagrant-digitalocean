@@ -63,6 +63,14 @@ module VagrantPlugins
             :name => @machine.provider_config.domain,
             :ip_address => public_network['ip_address']
           })
+          @client.post('/v2/domains/' + @machine.provider_config.domain + '/records', {
+            :type => 'CNAME',
+            :name => 'www',
+            :data => '@',
+            :priority => nil,
+            :port => nil,
+            :weight => nil
+          })
           end
 
           # wait for ssh to be ready
