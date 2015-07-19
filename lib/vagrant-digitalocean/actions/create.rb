@@ -59,18 +59,16 @@ module VagrantPlugins
           end
 
           if @machine.provider_config.domain
-          @client.post('/v2/domains', {
-            :name => @machine.provider_config.domain,
-            :ip_address => public_network['ip_address']
-          })
-          @client.post('/v2/domains/' + @machine.provider_config.domain + '/records', {
-            :type => 'CNAME',
-            :name => 'www',
-            :data => '@',
-            :priority => nil,
-            :port => nil,
-            :weight => nil
-          })
+            @client.post('/v2/domains', {
+              :name => @machine.provider_config.domain,
+              :ip_address => public_network['ip_address']
+            })
+
+            if @machine.provider_config.domain_records
+              @machine.provider_config.domain_records.each do |record| 
+                @client.post('/v2/domains/' + @machine.provider_config.domain + '/records', record)
+              end
+            end
           end
 
           # wait for ssh to be ready
